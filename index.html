@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Zeki Chatroom</title>
+	<link rel="stylesheet" href="./css/zekichatroom.css?v1.1">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+</head>
+<body>
+	<div class="mask"></div>	
+	<div id="login-box">
+		<span id="close-button"></span>
+		<h1>登入</h1>
+		<div class="login-select-button">
+			<button id="login-guest" class="login-type-button guest" onclick="loginParamsDialog(guest);">
+				<span>guest</span>
+			</button>
+			<button id="login-facebook" class="login-type-button" onclick="loginParamsDialog(facebook);">
+				<span>facebook</span>
+			</button>
+			<button id="login-google" class="login-type-button" onclick="loginParamsDialog(google);">
+				<span>google</span>
+			</button>
+			<button id="login-twitter" class="login-type-button" onclick="loginParamsDialog(twitter);">
+				<span>twitter</span>
+			</button>
+		</div>
+		<div id="guest-login">
+			<div>
+				<label for="guest-username">Username</label>	
+				<input type="text" id="guest-username" placeholder="請輸入名子或暱稱。">
+				<select name="YourGender" onChange="gender(this.options[this.selectedIndex].value);">
+					<option value="Male">男生</option>
+					<option value="Female">女生</option>
+				</select>
+			</div>
+			<button class="login-button back" onclick="loginDialog()">返回</button>
+			<button class="login-button" onclick="guestSignIn(guest)">登入</button>
+			
+		</div>
+		
+	</div>
+	
+	<div id="user-info">
+		<div class="member-wrap"><span id="member-title">Member List</span><i id="toggle-btn" class="arrow-btn fas fa-caret-left"></i></div>
+		<div id="member-list"></div>	
+	</div>
+	
+	<div id="chat-wrap">
+		<!-- <input type="text" id="chat-input" placeholder="請輸入您想說的話。"> -->
+		<textarea rows="4" cols="50" id="chat-input" placeholder="請輸入您想說的話。"></textarea>
+		<div class="input-tip">請按Enter送出訊息!</div >
+		<!-- <input type="button" id="chat-submit-btn" value="送出"> -->
+		<div id="chat-list"></div>	
+	</div>
+	
+
+</body>
+<webScript>
+	<script src="./scripts/ZekiCore.js"></script>
+</webScript>
+
+</html>
