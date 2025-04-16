@@ -183,12 +183,6 @@
 		provider: new firebase.auth.GoogleAuthProvider()
 	}
 
-	window.twitter = {
-		id: 'twitter',
-		type: 'twitter',
-		provider: new firebase.auth.TwitterAuthProvider()
-	}
-
 
 	chatroom.guestSignIn = function(loginMethod) {
 
