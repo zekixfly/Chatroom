@@ -244,7 +244,8 @@
 				break;
 			case 'google':
 				provider = loginMethod.provider;
-				provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+				provider.addScope('profile');
+				provider.addScope('email');
 				break;
 			case 'twitter':
 				provider = loginMethod.provider;
