@@ -234,6 +234,23 @@ h2 {
     /*border-radius: 50%;*/
 }
 
+#login-github {
+    transition: all 0.3s;
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+#login-github:hover {
+    transition: all 0.3s;
+    background-color: #1b1b1b;
+}
+
+#login-github::before {
+    font-family: Font Awesome\ 5 Brands;
+    content: "\f09b";
+    /*border-radius: 50%;*/
+}
+
 #guest-login {
     display: none;
 }

@@ -139,6 +139,7 @@
 			case 'facebook':
 			case 'google':
 			case 'twitter':
+			case 'github':
 				socialMediaSignIn(loginMethod);				
 				break;			
 			
@@ -182,7 +183,12 @@
 		type: 'google',
 		provider: new firebase.auth.GoogleAuthProvider()
 	}
-
+	
+	window.github = {
+		id: 'github',
+		type: 'github',
+		provider: new firebase.auth.GithubAuthProvider()
+	}
 
 	chatroom.guestSignIn = function(loginMethod) {
 
@@ -248,6 +254,9 @@
 				provider.addScope('email');
 				break;
 			case 'twitter':
+				provider = loginMethod.provider;
+				break;
+			case 'github':
 				provider = loginMethod.provider;
 				break;
 			default:
