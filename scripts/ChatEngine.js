@@ -136,7 +136,7 @@
 				getIds([webId,'close-button']).batchAddClass('block-style').arrSiblings().batchAddClass('none-style');				
 				break;
 			
-			case 'facebook':
+			// case 'facebook':
 			case 'google':
 			case 'twitter':
 			case 'github':
@@ -172,11 +172,11 @@
 		type: 'guest'
 	}
 
-	window.facebook = {
-		id: 'facebook',
-		type: 'facebook',
-		provider: new firebase.auth.FacebookAuthProvider()
-	}
+	// window.facebook = {
+	// 	id: 'facebook',
+	// 	type: 'facebook',
+	// 	provider: new firebase.auth.FacebookAuthProvider()
+	// }
 
 	window.google = {
 		id: 'google',
@@ -244,10 +244,10 @@
 		var provider ='';
 
 		switch (loginMethod.type) {
-			case 'facebook':
-				provider = loginMethod.provider;
-				provider.addScope('public_profile');
-				break;
+			// case 'facebook':
+			// 	provider = loginMethod.provider;
+			// 	provider.addScope('public_profile');
+			// 	break;
 			case 'google':
 				provider = loginMethod.provider;
 				provider.addScope('profile');
@@ -440,28 +440,28 @@
 
 
 
-	function initApp() {
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '453766181729978',
-	      xfbml      : true,
-	      version    : 'v2.12'
-	    });
-	    FB.AppEvents.logPageView();
-	  };
+	// function initApp() {
+	//   window.fbAsyncInit = function() {
+	//     FB.init({
+	//       appId      : '453766181729978',
+	//       xfbml      : true,
+	//       version    : 'v2.12'
+	//     });
+	//     FB.AppEvents.logPageView();
+	//   };
 
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName('webScript')[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "https://connect.facebook.net/en_US/sdk.js";
-	     fjs.insertBefore(js, fjs.childNodes[0]);
-	   }(document, 'script', 'facebook-jssdk'));
-	}
+	//   (function(d, s, id){
+	//      var js, fjs = d.getElementsByTagName('webScript')[0];
+	//      if (d.getElementById(id)) {return;}
+	//      js = d.createElement(s); js.id = id;
+	//      js.src = "https://connect.facebook.net/en_US/sdk.js";
+	//      fjs.insertBefore(js, fjs.childNodes[0]);
+	//    }(document, 'script', 'facebook-jssdk'));
+	// }
 
-	window.onload = function() {
-		initApp();
-	};
+	// window.onload = function() {
+	// 	initApp();
+	// };
 
 
 
