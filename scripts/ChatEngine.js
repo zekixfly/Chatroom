@@ -14,7 +14,7 @@
 
 	// Initialize Firebase
 	// TODO: Replace with your project's customized code snippet
-	var config = {
+	let config = {
 		apiKey: "AIzaSyAqmyPIr9TXfE7FYviyV8kSIrelcluNja8",
 		authDomain: "zeki-base.firebaseapp.com",
 		databaseURL: "https://zeki-base.firebaseio.com",
@@ -40,13 +40,13 @@
 
 
 	function writeNewMsg(uid, username, picture, msg) {
-		var nowTime = new Date(),
+		let nowTime = new Date(),
 			nowYear = nowTime.getFullYear(),
 			nowMouth = nowTime.getMonth()+1,
-			nowDate = nowTime.getDate();
+			nowDate = nowTime.getDate(),
 			msgTime = `${nowYear}/${nowMouth}/${nowDate}`;
 
-		var postMsg = {
+		let postMsg = {
 			name: username,
 			uid: uid,
 			msg: msg,
@@ -57,8 +57,8 @@
 	}
 
 	
-	var keyMap = {16: false, 13: false};
-	var inputBoolean = false,
+	let keyMap = {16: false, 13: false};
+	let inputBoolean = false,
 		toogleBtnBoolean = true,
 		imageUrl = './img/guest-male.png',
 		memberList = '',
@@ -79,61 +79,55 @@
 
 
 
-	getId('toggle-btn').onclick = function() {
+	ZekiCore.getId('toggle-btn').on('click', function() {
 		toogleBtnBoolean = !toogleBtnBoolean;
 		if(toogleBtnBoolean) {
-			var htmlCollection = getId('member-list').getElementsByTagName('ul')
-			var arr = [].slice.call(htmlCollection);
-			arr.map(function(ul){ul.lastChild.delClass('none-style')});
-			this.delClass('fa-caret-right');
-			getId('member-title').delClass('none-style');
-			getId('user-info').delClass('width7person');
-			getId('chat-wrap').delClass('width92person');
+			let ZekiCollection = ZekiCore.getId('member-list').getTag('ul');
+			Array.from(ZekiCollection).forEach(ul => ul.lastKid.delClass('none-style'));
+			ZekiCore.getId('toggle-btn').delClass('fa-caret-right');
+			ZekiCore.getId('member-title').delClass('none-style');
+			ZekiCore.getId('user-info').delClass('width7person');
+			ZekiCore.getId('chat-wrap').delClass('width92person');
 
 		}
 		else{
-			var htmlCollection = getId('member-list').getElementsByTagName('ul')
-			var arr = [].slice.call(htmlCollection);
-			arr.map(function(ul){ul.lastChild.addClass('none-style')});
-			this.addClass('fa-caret-right');
-			getId('member-title').addClass('none-style');
-			getId('user-info').addClass('width7person');
-			getId('chat-wrap').addClass('width92person');
+			let ZekiCollection = ZekiCore.getId('member-list').getTag('ul');
+			Array.from(ZekiCollection).forEach(ul => ul.lastKid.addClass('none-style'));
+			ZekiCore.getId('toggle-btn').addClass('fa-caret-right');
+			ZekiCore.getId('member-title').addClass('none-style');
+			ZekiCore.getId('user-info').addClass('width7person');
+			ZekiCore.getId('chat-wrap').addClass('width92person');
 		}
-		
+	});
 
-
-	}
-
-	getId('chat-input').onclick = function() {
+	ZekiCore.getId('chat-input').on('click', function() {
 		if(inputBoolean == false) {
-			getId('chat-input').disabled = true;
+			ZekiCore.getId('chat-input').disabled = true;
 			loginDialog();
-			getId('login-box').delClass('none-style');
-			getClasses('mask')[0].delClass('none-style');
+			ZekiCore.getId('login-box').delClass('none-style');
+			ZekiCore.getClass('mask')[0].delClass('none-style');
 		}
-		
-	}
+	});
 
-	getId('close-button').onclick =function() {
-		getId('chat-input').disabled = false;
-		getId('login-box').addClass('none-style');
-		getClasses('mask')[0].addClass('none-style');
-	}
+	ZekiCore.getId('close-button').on('click', function() {
+		ZekiCore.getId('chat-input').disabled = false;
+		ZekiCore.getId('login-box').addClass('none-style');
+		ZekiCore.getClass('mask')[0].addClass('none-style');
+	});
 
 
 
 
 	chatroom.loginDialog = function() {
-		getId('guest-login').delClass('block-style').siblings().batchDelClass('none-style');
+		ZekiCore.getId('guest-login').delClass('block-style').siblings().delClass('none-style');
 	}
 
 	chatroom.loginParamsDialog = function (loginMethod) {
-		var webId =loginMethod.id+ '-login';
+		let webId =loginMethod.id+ '-login';
 		switch (loginMethod.id) {
 			case 'guest':
-				// guestSignIn();	 			
-				getIds([webId,'close-button']).batchAddClass('block-style').arrSiblings().batchAddClass('none-style');				
+				// guestSignIn();
+				ZekiCore.getIds(webId, 'close-button').addClass('block-style').siblings().addClass('none-style');				
 				break;
 			
 			// case 'facebook':
@@ -192,21 +186,21 @@
 
 	chatroom.guestSignIn = function(loginMethod) {
 
-		if(getId('guest-username').value) {				
-			getId('login-box').addClass('none-style');
-			getClasses('mask')[0].addClass('none-style');
-			getId('user-info').addClass('block-style');
+		if(ZekiCore.getId('guest-username').value) {				
+			ZekiCore.getId('login-box').addClass('none-style');
+			ZekiCore.getClass('mask')[0].addClass('none-style');
+			ZekiCore.getId('user-info').addClass('block-style');
 			
 
-			var uid = memberRef.push().key;
+			let uid = memberRef.push().key;
 			
 			userId = uid;//take time as guest's id.		
-			userName = getId('guest-username').value;	
+			userName = ZekiCore.getId('guest-username').value;	
 			userType = loginMethod.type;
 			writeUserData(userType, userId, userName, null, imageUrl, null);
 			
-			// getId('member-list').addClass('block-style').innerHTML =`Welcome, ${userName}!`;
-			getId('chat-input').disabled = false;
+			// ZekiCore.getId('member-list').addClass('block-style').innerHTML =`Welcome, ${userName}!`;
+			ZekiCore.getId('chat-input').disabled = false;
 			inputBoolean = true;
 
 		}
@@ -219,8 +213,8 @@
 
 
 			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
+			let errorCode = error.code;
+			let errorMessage = error.message;
 			// [START_EXCLUDE]
 			if (errorCode === 'auth/operation-not-allowed') {
 			alert('You must enable Anonymous auth in the Firebase Console.');
@@ -241,7 +235,7 @@
 		// firebase.auth().signOut();
 	//}
 
-		var provider ='';
+		let provider ='';
 
 		switch (loginMethod.type) {
 			// case 'facebook':
@@ -266,34 +260,34 @@
 		firebase.auth().useDeviceLanguage();
 		
 		firebase.auth().signInWithPopup(provider).then(function(result) {
-			// var secret = result.credential.secret; //twiiter secret
+			// let secret = result.credential.secret; //twiiter secret
 			// console.log('twitter secret: '+secret);
 
-			var token = result.credential.accessToken;
-			var user = result.user;
+			let token = result.credential.accessToken;
+			let user = result.user;
 			
-			getId('login-box').addClass('none-style');
-			getClasses('mask')[0].addClass('none-style');
-			getId('user-info').addClass('block-style');
+			ZekiCore.getId('login-box').addClass('none-style');
+			ZekiCore.getClass('mask')[0].addClass('none-style');
+			ZekiCore.getId('user-info').addClass('block-style');
 			userId = user.uid;
 			imageUrl = user.photoURL;
 			userName = user.displayName;
 			userType = loginMethod.type;
 			userEmail = user.email;
 			writeUserData(userType, userId, userName, userEmail, imageUrl, null);					
-			// getId('member-list').addClass('block-style').innerHTML =`Welcome, ${userName}!`;
-			getId('chat-input').disabled = false;
+			// ZekiCore.getId('member-list').addClass('block-style').innerHTML =`Welcome, ${userName}!`;
+			ZekiCore.getId('chat-input').disabled = false;
 			inputBoolean = true;
 
 		}).catch(function(error) {
 
 	          // Handle Errors here.
-	          var errorCode = error.code;
-	          var errorMessage = error.message;
+	          let errorCode = error.code;
+	          let errorMessage = error.message;
 	          // The email of the user's account used.
-	          var email = error.email;
+	          let email = error.email;
 	          // The firebase.auth.AuthCredential type that was used.
-	          var credential = error.credential;
+	          let credential = error.credential;
 	          // [START_EXCLUDE]
 	          if (errorCode === 'auth/account-exists-with-different-credential') {
 	            alert('You have already signed up with a different auth provider for that email.');
@@ -311,12 +305,12 @@
 		// console.log('keycode'+e.keyCode);
 	if(inputBoolean == true) {
 		if(e.keyCode==13 && keyMap[16] == false) {			
-			msg = getId('chat-input').value;
+			msg = ZekiCore.getId('chat-input').value;
 			if(msg == '') {
 				alert('您尚未輸入任何訊息!!')
 			}else {
 				writeNewMsg(userId, userName, imageUrl, msg);
-				getId('chat-input').value = '';
+				ZekiCore.getId('chat-input').value = '';
 			}
 			
 			
@@ -325,7 +319,7 @@
 		if(e.keyCode in keyMap) {
 			keyMap[e.keyCode] = true;
 			// if(keyMap[16] && keyMap[13]) {
-			// 	getId('chat-input').value += '<br />';
+			// 	ZekiCore.getId('chat-input').value += '<br />';
 			// }
 		}
 	}
@@ -341,7 +335,7 @@
 
 
 	msgRef.on('child_added', function(snapshot) {
-	   var obj = snapshot.val();
+	   let obj = snapshot.val();
 	   // console.log(userId);
 	   // switch (userType) {
 	   	// case 'guest':
@@ -386,28 +380,28 @@
 
 	function displayChatMessage(name, msg, icon, msgTime) {
 		// setTimeout(function() {
-			var chatUl = document.createElement('ul');
-			var iconLi = document.createElement('li');
+			let chatUl = ZekiCore.makeTag('ul');
+			let iconLi = ZekiCore.makeTag('li');
 
-			var chatImgLi = document.createElement('li');
-			chatImgLi.innerHTML = `<img src="${icon}" style="width: 50px; border-radius: 50px;">`;
-			var chatNameLi = document.createElement('li');
-			chatNameLi.innerText = name;		
+			let chatImgLi = ZekiCore.makeTag('li');
+			chatImgLi.html = `<img src="${icon}" style="width: 50px; border-radius: 50px;">`;
+			let chatNameLi = ZekiCore.makeTag('li');
+			chatNameLi.text = name;		
 			
 
-			var chatMsgLi = document.createElement('li');
-			chatMsgLi.innerText = msg;
-			var timeLi = document.createElement('li');
-			timeLi.innerText = msgTime;
+			let chatMsgLi = ZekiCore.makeTag('li');
+			chatMsgLi.text = msg;
+			let timeLi = ZekiCore.makeTag('li');
+			timeLi.text = msgTime;
 
-			// var personName = document.createTextNode(name+': ')
-			// var personSay = document.createTextNode(msg);
-				iconLi.addSeeds([chatImgLi,chatNameLi]);
-				chatMsgLi.addSeed(timeLi);
-				chatUl.addSeeds([iconLi,chatMsgLi]);
+			// let personName = document.createTextNode(name+': ')
+			// let personSay = document.createTextNode(msg);
+				iconLi.addKids(chatImgLi, chatNameLi);
+				chatMsgLi.addKid(timeLi);
+				chatUl.addKids(iconLi, chatMsgLi);
 				// console.log(iconLi,chatMsgLi);
 				chatMsgLi.className = 'animated white-space-pre';					
-			getId('chat-list').insertBefore(chatUl, getId('chat-list').childNodes[0]);
+			ZekiCore.getId('chat-list').before(chatUl, ZekiCore.getId('chat-list').kidNodes[0]);
 		// } ,1000);
 
 	}
@@ -417,7 +411,7 @@
 	    	// console.log('onAuthStateChanged: '+JSON.stringify(user, null ,2));    	
 	memberRef.on('value', function(snapshot) {
 		memberList = '';
-		var obj = snapshot.val();
+		let obj = snapshot.val();
 		// console.log('onValue: '+obj);
 		if(obj) {
 			Object.keys(obj).map(function(uid, item){
@@ -425,11 +419,10 @@
 				// displayChatMessage(obj[uid].name, obj[uid].msg, obj[uid].authorPic);
 				memberList = `${memberList}<ul><li title ="${obj[uid].username}"><img src="${obj[uid].profile_picture}" style="width: 50px; border-radius: 50px;"></li><li>${obj[uid].username}</li></ul>`;
 				if(toogleBtnBoolean == false) {
-					var htmlCollection = getId('member-list').getElementsByTagName('ul')
-					var arr = [].slice.call(htmlCollection);
-					arr.map(function(ul){ul.lastChild.delClass('none-style')});
+					let ZekiCollection = ZekiCore.getId('member-list').getTag('ul');
+					Array.from(ZekiCollection).map(function(ul){ul.lastChild.delClass('none-style')});
 				}
-				getId('member-list').innerHTML = memberList;
+				ZekiCore.getId('member-list').html = memberList;
 			});	
 		}
 
@@ -451,7 +444,7 @@
 	//   };
 
 	//   (function(d, s, id){
-	//      var js, fjs = d.getElementsByTagName('webScript')[0];
+	//      let js, fjs = d.getTag('webScript')[0];
 	//      if (d.getElementById(id)) {return;}
 	//      js = d.createElement(s); js.id = id;
 	//      js.src = "https://connect.facebook.net/en_US/sdk.js";
