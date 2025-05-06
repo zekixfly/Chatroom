@@ -73,46 +73,52 @@
 		memberRef = firebase.database().ref('/chatroom/users/'),
 		msgRef = firebase.database().ref('/chatroom/message/');
 
-	
+	const toggleBtnEl = ZekiCore.getId('toggle-btn'),
+		  memberListEl = ZekiCore.getId('member-list'),
+		  memberTitleEl = ZekiCore.getId('member-title'),
+		  userInfoEl = ZekiCore.getId('user-info'),
+		  chatWrapEl = ZekiCore.getId('chat-wrap'),
+		  chatInputEl = ZekiCore.getId('chat-input'),
+		  loginBoxEl = ZekiCore.getId('login-box'),
+		  maskEl = ZekiCore.getClass('mask')[0],
+		  guestUsernameEl = ZekiCore.getId('guest-username'),
+		  chatListEl = ZekiCore.getId('chat-list');
 
 
-
-
-
-	ZekiCore.getId('toggle-btn').on('click', function() {
+	toggleBtnEl.on('click', () => {
 		toogleBtnBoolean = !toogleBtnBoolean;
 		if(toogleBtnBoolean) {
-			let ZekiCollection = ZekiCore.getId('member-list').getTag('ul');
+			let ZekiCollection = memberListEl.getTag('ul');
 			Array.from(ZekiCollection).forEach(ul => ul.lastKid.delClass('none-style'));
-			ZekiCore.getId('toggle-btn').delClass('fa-caret-right');
-			ZekiCore.getId('member-title').delClass('none-style');
-			ZekiCore.getId('user-info').delClass('width7person');
-			ZekiCore.getId('chat-wrap').delClass('width92person');
+			toggleBtnEl.delClass('fa-caret-right');
+			memberTitleEl.delClass('none-style');
+			userInfoEl.delClass('width7person');
+			chatWrapEl.delClass('width92person');
 
 		}
 		else{
-			let ZekiCollection = ZekiCore.getId('member-list').getTag('ul');
+			let ZekiCollection = memberListEl.getTag('ul');
 			Array.from(ZekiCollection).forEach(ul => ul.lastKid.addClass('none-style'));
-			ZekiCore.getId('toggle-btn').addClass('fa-caret-right');
-			ZekiCore.getId('member-title').addClass('none-style');
-			ZekiCore.getId('user-info').addClass('width7person');
-			ZekiCore.getId('chat-wrap').addClass('width92person');
+			toggleBtnEl.addClass('fa-caret-right');
+			memberTitleEl.addClass('none-style');
+			userInfoEl.addClass('width7person');
+			chatWrapEl.addClass('width92person');
 		}
 	});
 
-	ZekiCore.getId('chat-input').on('click', function() {
+	chatInputEl.on('click', () => {
 		if(inputBoolean == false) {
-			ZekiCore.getId('chat-input').disabled = true;
+			chatInputEl.disabled = true;
 			loginDialog();
-			ZekiCore.getId('login-box').delClass('none-style');
-			ZekiCore.getClass('mask')[0].delClass('none-style');
+			loginBoxEl.delClass('none-style');
+			maskEl.delClass('none-style');
 		}
 	});
 
-	ZekiCore.getId('close-button').on('click', function() {
-		ZekiCore.getId('chat-input').disabled = false;
-		ZekiCore.getId('login-box').addClass('none-style');
-		ZekiCore.getClass('mask')[0].addClass('none-style');
+	ZekiCore.getId('close-button').on('click', () => {
+		chatInputEl.disabled = false;
+		loginBoxEl.addClass('none-style');
+		maskEl.addClass('none-style');
 	});
 
 
@@ -186,21 +192,21 @@
 
 	chatroom.guestSignIn = function(loginMethod) {
 
-		if(ZekiCore.getId('guest-username').value) {				
-			ZekiCore.getId('login-box').addClass('none-style');
-			ZekiCore.getClass('mask')[0].addClass('none-style');
-			ZekiCore.getId('user-info').addClass('block-style');
+		if(guestUsernameEl.value) {				
+			loginBoxEl.addClass('none-style');
+			maskEl.addClass('none-style');
+			userInfoEl.addClass('block-style');
 			
 
 			let uid = memberRef.push().key;
 			
 			userId = uid;//take time as guest's id.		
-			userName = ZekiCore.getId('guest-username').value;	
+			userName = guestUsernameEl.value;	
 			userType = loginMethod.type;
 			writeUserData(userType, userId, userName, null, imageUrl, null);
 			
-			// ZekiCore.getId('member-list').addClass('block-style').innerHTML =`Welcome, ${userName}!`;
-			ZekiCore.getId('chat-input').disabled = false;
+			// memberListEl.addClass('block-style').innerHTML =`Welcome, ${userName}!`;
+			chatInputEl.disabled = false;
 			inputBoolean = true;
 
 		}
@@ -208,7 +214,7 @@
 			alert('您尚未輸入名子或暱稱');
 		}
 	    // [START authanon]
-	    firebase.auth().signInAnonymously().catch(function(error) {
+	    firebase.auth().signInAnonymously().catch(error => {
 
 
 
@@ -259,27 +265,27 @@
 		}
 		firebase.auth().useDeviceLanguage();
 		
-		firebase.auth().signInWithPopup(provider).then(function(result) {
+		firebase.auth().signInWithPopup(provider).then(result => {
 			// let secret = result.credential.secret; //twiiter secret
 			// console.log('twitter secret: '+secret);
 
 			let token = result.credential.accessToken;
 			let user = result.user;
 			
-			ZekiCore.getId('login-box').addClass('none-style');
-			ZekiCore.getClass('mask')[0].addClass('none-style');
-			ZekiCore.getId('user-info').addClass('block-style');
+			loginBoxEl.addClass('none-style');
+			maskEl.addClass('none-style');
+			userInfoEl.addClass('block-style');
 			userId = user.uid;
 			imageUrl = user.photoURL;
 			userName = user.displayName;
 			userType = loginMethod.type;
 			userEmail = user.email;
 			writeUserData(userType, userId, userName, userEmail, imageUrl, null);					
-			// ZekiCore.getId('member-list').addClass('block-style').innerHTML =`Welcome, ${userName}!`;
-			ZekiCore.getId('chat-input').disabled = false;
+			// memberListEl.addClass('block-style').innerHTML =`Welcome, ${userName}!`;
+			chatInputEl.disabled = false;
 			inputBoolean = true;
 
-		}).catch(function(error) {
+		}).catch(error => {
 
 	          // Handle Errors here.
 	          let errorCode = error.code;
@@ -301,16 +307,16 @@
 	}
 
 
-	document.addEventListener('keydown', function(e) {
+	ZekiCore.on('keydown', e => {
 		// console.log('keycode'+e.keyCode);
 	if(inputBoolean == true) {
 		if(e.keyCode==13 && keyMap[16] == false) {			
-			msg = ZekiCore.getId('chat-input').value;
+			msg = chatInputEl.value;
 			if(msg == '') {
 				alert('您尚未輸入任何訊息!!')
 			}else {
 				writeNewMsg(userId, userName, imageUrl, msg);
-				ZekiCore.getId('chat-input').value = '';
+				chatInputEl.value = '';
 			}
 			
 			
@@ -319,14 +325,14 @@
 		if(e.keyCode in keyMap) {
 			keyMap[e.keyCode] = true;
 			// if(keyMap[16] && keyMap[13]) {
-			// 	ZekiCore.getId('chat-input').value += '<br />';
+			// 	chatInputEl.value += '<br />';
 			// }
 		}
 	}
 
 
 	});
-	document.addEventListener('keyup', function(e) {
+	ZekiCore.on('keyup', e => {
 		if(e.keyCode in keyMap) {
 			keyMap[e.keyCode] = false;
 		}
@@ -334,7 +340,7 @@
 
 
 
-	msgRef.on('child_added', function(snapshot) {
+	msgRef.on('child_added', snapshot => {
 	   let obj = snapshot.val();
 	   // console.log(userId);
 	   // switch (userType) {
@@ -401,7 +407,7 @@
 				chatUl.addKids(iconLi, chatMsgLi);
 				// console.log(iconLi,chatMsgLi);
 				chatMsgLi.className = 'animated white-space-pre';					
-			ZekiCore.getId('chat-list').before(chatUl, ZekiCore.getId('chat-list').kidNodes[0]);
+			chatListEl.before(chatUl, chatListEl.kidNodes[0]);
 		// } ,1000);
 
 	}
@@ -409,20 +415,20 @@
 	// firebase.auth().onAuthStateChanged(function(user) {
 	//     if (user) {
 	    	// console.log('onAuthStateChanged: '+JSON.stringify(user, null ,2));    	
-	memberRef.on('value', function(snapshot) {
+	memberRef.on('value', snapshot => {
 		memberList = '';
 		let obj = snapshot.val();
 		// console.log('onValue: '+obj);
 		if(obj) {
-			Object.keys(obj).map(function(uid, item){
+			Object.keys(obj).forEach((uid, item) => {
 				// console.log(obj[uid].profile_picture, obj[uid].username);
 				// displayChatMessage(obj[uid].name, obj[uid].msg, obj[uid].authorPic);
 				memberList = `${memberList}<ul><li title ="${obj[uid].username}"><img src="${obj[uid].profile_picture}" style="width: 50px; border-radius: 50px;"></li><li>${obj[uid].username}</li></ul>`;
 				if(toogleBtnBoolean == false) {
-					let ZekiCollection = ZekiCore.getId('member-list').getTag('ul');
-					Array.from(ZekiCollection).map(function(ul){ul.lastChild.delClass('none-style')});
+					let ZekiCollection = memberListEl.getTag('ul');
+					Array.from(ZekiCollection).forEach(ul => { ul.lastKid.delClass('none-style') });
 				}
-				ZekiCore.getId('member-list').html = memberList;
+				memberListEl.html = memberList;
 			});	
 		}
 
