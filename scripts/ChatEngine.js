@@ -135,6 +135,7 @@
 			
 			// case 'facebook':
 			case 'google':
+			case 'yahoo':
 			case 'twitter':
 			case 'github':
 				socialMediaSignIn(loginMethod);				
@@ -185,6 +186,12 @@
 		id: 'github',
 		type: 'github',
 		provider: new firebase.auth.GithubAuthProvider()
+	}
+
+	window.yahoo = {
+		id: 'yahoo',
+		type: 'yahoo',
+		provider: new firebase.auth.OAuthProvider('yahoo.com')
 	}
 
 	chatroom.guestSignIn = function(loginMethod) {
@@ -250,6 +257,9 @@
 				provider.addScope('profile');
 				provider.addScope('email');
 				break;
+			case 'yahoo':
+				provider = loginMethod.provider;
+				break;
 			case 'twitter':
 				provider = loginMethod.provider;
 				break;
@@ -265,10 +275,13 @@
 		firebase.auth().signInWithPopup(provider).then(result => {
 			// let secret = result.credential.secret; //twiiter secret
 			// console.log('twitter secret: '+secret);
-
+			console.log('result', result);
+			
 			let token = result.credential.accessToken;
 			let user = result.user;
 			
+			if(loginMethod.type === 'yahoo') user = user.providerData.at(0);
+
 			loginBoxEl.addClass('none-style');
 			maskEl.addClass('none-style');
 			userInfoEl.addClass('block-style');
