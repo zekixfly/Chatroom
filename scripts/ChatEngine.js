@@ -75,7 +75,6 @@
 
 	const toggleBtnEl = ZekiCore.getId('toggle-btn'),
 		  memberListEl = ZekiCore.getId('member-list'),
-		  memberTitleEl = ZekiCore.getId('member-title'),
 		  userInfoEl = ZekiCore.getId('user-info'),
 		  chatWrapEl = ZekiCore.getId('chat-wrap'),
 		  chatInputEl = ZekiCore.getId('chat-input'),
@@ -88,21 +87,19 @@
 	toggleBtnEl.on('click', () => {
 		toogleBtnBoolean = !toogleBtnBoolean;
 		if(toogleBtnBoolean) {
-			let ZekiCollection = memberListEl.getTag('ul');
+			let ZekiCollection = memberListEl.delClass('ai-center').getTag('ul');
 			Array.from(ZekiCollection).forEach(ul => ul.lastKid.delClass('none-style'));
 			toggleBtnEl.delClass('fa-caret-right');
-			memberTitleEl.delClass('none-style');
-			userInfoEl.delClass('width7person');
-			chatWrapEl.delClass('width92person');
+			userInfoEl.delClass('width100px');
+			chatWrapEl.delClass('width100person');
 
 		}
 		else{
-			let ZekiCollection = memberListEl.getTag('ul');
+			let ZekiCollection = memberListEl.addClass('ai-center').getTag('ul');
 			Array.from(ZekiCollection).forEach(ul => ul.lastKid.addClass('none-style'));
 			toggleBtnEl.addClass('fa-caret-right');
-			memberTitleEl.addClass('none-style');
-			userInfoEl.addClass('width7person');
-			chatWrapEl.addClass('width92person');
+			userInfoEl.addClass('width100px');
+			chatWrapEl.addClass('width100person');
 		}
 	});
 
