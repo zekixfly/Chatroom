@@ -198,7 +198,8 @@
 /*除了input以外的所有元素 */
 *:not(input) {
   border: 0px solid #eee;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -235,13 +236,15 @@ h2 {
   left: 43.75%;
   text-align: center;
   z-index: 200;
+  -webkit-transition: all 1s;
   transition: all 1s;
 }
 
 #alert-box, #confirm-box, #login-box {
   background-color: rgba(250, 250, 250, 0.9);
   border: 1px solid #f97352;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   width: 25%;
   position: absolute;
   top: 25%;
@@ -305,11 +308,13 @@ h2 {
   opacity: 0.6;
 }
 #close-button::before {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   content: "X";
   font-size: 20px;
 }
 #close-button:hover::before {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   color: #fff !important;
 }
@@ -346,28 +351,31 @@ h2 {
 }
 
 #login-guest {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #989898;
   color: #fff;
 }
 #login-guest:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #7e7e7e;
 }
-
-.guest::before {
-  content: "\f2bd";
+#login-guest::before {
   font-family: Font Awesome\ 5 Free;
+  content: "\f2bd";
   font-weight: 900;
   border-radius: 50%;
 }
 
 #login-twitter {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #55acee;
   color: #fff;
 }
 #login-twitter:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #3092d3;
 }
@@ -377,11 +385,13 @@ h2 {
 }
 
 #login-google {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #dd4b39;
   color: #fff;
 }
 #login-google:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #bd2c22;
 }
@@ -391,11 +401,13 @@ h2 {
 }
 
 #login-yahoo {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #7d2eff;
   color: #fff;
 }
 #login-yahoo:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #6001d2;
 }
@@ -405,11 +417,13 @@ h2 {
 }
 
 #login-facebook {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #3b5b9b;
   color: #fff;
 }
 #login-facebook:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #1f4582;
 }
@@ -419,11 +433,13 @@ h2 {
 }
 
 #login-github {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #333333;
   color: #ffffff;
 }
 #login-github:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #1b1b1b;
 }
@@ -440,21 +456,36 @@ h2 {
 }
 
 .chatroom-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   height: 100%;
 }
 
 #member-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: #fff;
   padding: 15px 10px;
   overflow: auto;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 #member-list > ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: 10px 0px;
   overflow: hidden;
@@ -493,7 +524,9 @@ h2 {
 }
 
 .ai-center {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .arrow-btn {
@@ -513,10 +546,12 @@ h2 {
   font-size: 20px;
   line-height: 40px;
   border-bottom: 1px solid #fff;
-  box-shadow: 0px 1px 6px 2px #000;
+  -webkit-box-shadow: 0px 1px 6px 2px #000;
+          box-shadow: 0px 1px 6px 2px #000;
   background-color: rgba(0, 139, 139, 0.3);
   color: #fff;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 #guest-username {
@@ -530,9 +565,11 @@ h2 {
 }
 
 .login-button {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   margin: 0px 5px 20px;
   border: none;
+  -webkit-transition: background-color 300ms ease-in-out 0s;
   transition: background-color 300ms ease-in-out 0s;
   background-color: #80b620;
   color: #fff;
@@ -540,15 +577,18 @@ h2 {
   cursor: pointer;
 }
 .login-button:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #649a00;
 }
 
 .back {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #888;
 }
 .back:hover {
+  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #707070;
 }
@@ -572,7 +612,8 @@ h2 {
   padding: 10px;
   background-color: #303030;
   border: 2px solid var(--border-default);
-  box-shadow: 0px 0px 2px #000;
+  -webkit-box-shadow: 0px 0px 2px #000;
+          box-shadow: 0px 0px 2px #000;
   border-radius: 10px;
 }
 #chat-input:focus-visible {
@@ -654,31 +695,73 @@ h2 {
 }
 
 .animated {
+  -webkit-animation-name: flipInX;
   animation-name: flipInX;
+  -webkit-animation-duration: 1s;
   animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  -webkit-transform-origin: center left;
   transform-origin: center left;
+  -webkit-backface-visibility: visible !important;
   backface-visibility: visible !important;
 }
-@keyframes flipInX {
+
+@-webkit-keyframes flipInX {
   from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
     transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
     opacity: 0;
   }
   40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
     transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
   }
   60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
     transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
     opacity: 1;
   }
   80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
     transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
   }
   to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+@keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+  to {
+    -webkit-transform: perspective(400px);
     transform: perspective(400px);
   }
 }

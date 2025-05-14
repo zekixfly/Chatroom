@@ -1,16 +1,40 @@
 
 (function(chatroom){
 
+	const ssoDatas = [
+		{
+			id: 'login-guest',
+			class: 'login-type-button',
+			click: 'loginParamsDialog(guest)',
+			content: 'Guest'
+		},
+		{
+			id: 'login-google',
+			class: 'login-type-button',
+			click: 'loginParamsDialog(google)',
+			content: 'Google'
+		},
+		{
+			id: 'login-yahoo',
+			class: 'login-type-button',
+			click: 'loginParamsDialog(yahoo)',
+			content: 'Yahoo'
+		},
+		{
+			id: 'login-github',
+			class: 'login-type-button',
+			click: 'loginParamsDialog(github)',
+			content: 'Github'
+		},
+	];
+	zk.getId('login-box').dataBind({ ssoDatas });
 
 	function closeIt() {
 		memberRef.child(userId).remove();
 	  // return "Any string value here forces a dialog box to \n" + 
 	  //        "appear before closing the window.";
 	}
-
 	window.onbeforeunload = closeIt;
-
-
 
 	// Initialize Firebase
 	// TODO: Replace with your project's customized code snippet
@@ -165,30 +189,30 @@
 	}
 
 
-	window.guest = {
+	chatroom.guest = {
 		id: 'guest',
 		type: 'guest'
 	}
 
-	// window.facebook = {
+	// chatroom.facebook = {
 	// 	id: 'facebook',
 	// 	type: 'facebook',
 	// 	provider: new firebase.auth.FacebookAuthProvider()
 	// }
 
-	window.google = {
+	chatroom.google = {
 		id: 'google',
 		type: 'google',
 		provider: new firebase.auth.GoogleAuthProvider()
 	}
 	
-	window.github = {
+	chatroom.github = {
 		id: 'github',
 		type: 'github',
 		provider: new firebase.auth.GithubAuthProvider()
 	}
 
-	window.yahoo = {
+	chatroom.yahoo = {
 		id: 'yahoo',
 		type: 'yahoo',
 		provider: new firebase.auth.OAuthProvider('yahoo.com')
