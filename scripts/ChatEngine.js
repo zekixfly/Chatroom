@@ -419,31 +419,24 @@
 
 
 	function displayChatMessage(name, msg, icon, msgTime) {
-		// setTimeout(function() {
-			let chatUl = ZekiCore.makeTag('ul');
-			let iconLi = ZekiCore.makeTag('li');
+		let chatUl = ZekiCore.makeTag('ul');
+		let iconLi = ZekiCore.makeTag('li');
 
-			let chatImgLi = ZekiCore.makeTag('li');
-			chatImgLi.html = `<img src="${icon}" style="width: 50px; border-radius: 50px;">`;
-			let chatNameLi = ZekiCore.makeTag('li');
-			chatNameLi.text = name;		
-			
+		let chatImgLi = ZekiCore.makeTag('li');
+		chatImgLi.html = `<img src="${icon}" style="width: 50px; border-radius: 50px;">`;
+		let chatNameLi = ZekiCore.makeTag('li');
+		chatNameLi.text = name;
 
-			let chatMsgLi = ZekiCore.makeTag('li');
-			chatMsgLi.text = msg;
-			let timeLi = ZekiCore.makeTag('li');
-			timeLi.text = msgTime;
+		let chatMsgLi = ZekiCore.makeTag('li');
+		chatMsgLi.text = msg;
+		let timeLi = ZekiCore.makeTag('li');
+		timeLi.text = msgTime;
 
-			// let personName = document.createTextNode(name+': ')
-			// let personSay = document.createTextNode(msg);
-				iconLi.addKids(chatImgLi, chatNameLi);
-				chatMsgLi.addKid(timeLi);
-				chatUl.addKids(iconLi, chatMsgLi);
-				// console.log(iconLi,chatMsgLi);
-				chatMsgLi.className = 'animated white-space-pre';					
-			chatListEl.before(chatUl, chatListEl.kidNodes[0]);
-		// } ,1000);
-
+		iconLi.addKids(chatImgLi, chatNameLi);
+		chatMsgLi.addKid(timeLi);
+		chatUl.addKids(iconLi, chatMsgLi);
+		chatMsgLi.className = 'animated white-space-pre';					
+		chatListEl.before(chatUl, chatListEl.kidNodes[0]);
 	}
 
 	// firebase.auth().onAuthStateChanged(function(user) {
