@@ -21,13 +21,13 @@
     <div id="login-box">
       <span id="close-button"></span>
       <h1>登入</h1>
-      <div class="login-select-button" z-for="item of ssoDatas">
-        <button
+      <div class="login-select-button">
+        <button z-for="item of ssoDatas"
           id="{{ item.id }}"
           class="{{ item.class }}"
           onclick="{{ item.click }}"
         >
-          <span>{{ item.content }}</span>
+          <span z-cloak>{{ item.content }}</span>
         </button>
       </div>
       <div id="guest-login">

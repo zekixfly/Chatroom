@@ -206,6 +206,10 @@
   font-family: monospace;
 }
 
+[z-cloak] {
+  display: none;
+}
+
 html {
   height: 100%;
 }
