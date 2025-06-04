@@ -1,0 +1,66 @@
+<template>
+  <div class="mask"></div>
+  <div id="login-box">
+    <span id="close-button"></span>
+    <h1>登入</h1>
+    <div class="login-select-button">
+      <button
+        z-for="item of ssoDatas"
+        id="{{ item.id }}"
+        class="{{ item.class }}"
+        onclick="{{ item.click }}"
+      >
+        <span z-cloak>{{ item.content }}</span>
+      </button>
+    </div>
+    <div id="guest-login">
+      <div>
+        <label for="guest-username">Username</label>
+        <input
+          type="text"
+          id="guest-username"
+          placeholder="請輸入名子或暱稱。"
+        />
+        <select
+          name="YourGender"
+          onChange="gender(this.options[this.selectedIndex].value);"
+        >
+          <option value="Male">男生</option>
+          <option value="Female">女生</option>
+        </select>
+      </div>
+      <button class="login-button back" onclick="loginDialog()">返回</button>
+      <button class="login-button" onclick="guestSignIn(guest)">登入</button>
+    </div>
+  </div>
+</template>
+
+<script>
+  const ssoDatas = [
+    {
+      id: "login-guest",
+      class: "login-type-button",
+      click: "loginParamsDialog(guest)",
+      content: "Guest",
+    },
+    {
+      id: "login-google",
+      class: "login-type-button",
+      click: "loginParamsDialog(google)",
+      content: "Google",
+    },
+    {
+      id: "login-yahoo",
+      class: "login-type-button",
+      click: "loginParamsDialog(yahoo)",
+      content: "Yahoo",
+    },
+    {
+      id: "login-github",
+      class: "login-type-button",
+      click: "loginParamsDialog(github)",
+      content: "Github",
+    },
+  ];
+  zk.getId("login-box").dataBind({ ssoDatas });
+</script>
